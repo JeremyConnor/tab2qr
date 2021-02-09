@@ -17,6 +17,115 @@ const deviceHeight = Dimensions.get('screen').height;
 
 const Scanner = () => {
 
+    const [state, setState] = useState({
+        scan: false,
+        scanResult: false,
+        result: null
+    });
+
+    const onSuccess = (e) => {
+        const checkUrl = e.data.substring(0, 4);
+        console.log('scanned data' + checkUrl);
+        setState({
+            ...state,
+            result: e,
+            scan: false,
+            scanResult: true
+        })
+        if (checkUrl === 'http') {
+            Linking.openURL(e.data)
+                .catch(err => console.error('An error occured', err));
+
+        } else {
+            setState({
+                ...state,
+                result: e,
+                scan: false,
+                scanResult: true
+            })
+        }
+
+    }
+
+    const activeQR = () => {
+        setState({
+            ...state,
+            scan: true
+        })
+    }
+    const scanAgain = () => {
+        setState({
+            ...state,
+            scan: true,
+            scanResult: false
+        })
+    }
+
+    const description = 'Scan your QR code!'
+    return (
+        <View style={styles.scrollViewStyle}>
+          <Fragment>
+            <StatusBar barStyle="dark-content" />
+            <Text style={styles.textTitle}>Tab2QR</Text>
+            {!state.scan && !state.scanResult &&
+              <View style={styles.cardView} >
+                <Text numberOfLines={1} style={styles.descText}>{description}</Text>
+
+                <TouchableOpacity onPress={() => activeQR()} style={styles.buttonTouchable}>
+                  <Text style={styles.buttonTextStyle}>Click to Scan</Text>
+                </TouchableOpacity>
+
+              </View>
+            }
+
+            {state.scanResult &&
+              <Fragment>
+                <Text style={styles.textTitle1}>Result !</Text>
+                <View style={state.scanResult ? styles.scanCardView : styles.cardView}>
+                  <Text>Type : {state.result.type}</Text>
+                  <Text>Result : {state.result.data}</Text>
+                  <Text numberOfLines={3}>RawData: {state.result.rawData}</Text>
+                  <TouchableOpacity onPress={() => scanAgain()} style={styles.buttonTouchable}>
+                    <Text style={styles.buttonTextStyle}>Click to Scan again!</Text>
+                  </TouchableOpacity>
+				</View>
+              </Fragment>
+            }
+
+			{
+				state.scan &&
+                <QRCodeScanner
+                  reactivate={true}
+                  showMarker={true}
+                  ref={(node) => { this.scanner = node }}
+                  onRead={(e) => onSuccess(e)}
+                  topContent={
+                    <Text style={styles.centerText}>
+                      Scan any QR
+                    </Text>
+            	  }
+            	  bottomContent={
+              		<View>
+                	  <TouchableOpacity style={styles.buttonTouchable} onPress={() => this.scanner.reactivate()}>
+                  		<Text style={styles.buttonTextStyle}>OK. Got it!</Text>
+                	  </TouchableOpacity>
+					  <TouchableOpacity style={styles.buttonTouchable} 
+                  		onPress={() => 
+                    	  setState({ 
+                      		...state,
+                      		scan: false 
+                    	  })}
+                	  >
+                  		<Text style={styles.buttonTextStyle}>Stop Scan</Text>
+                	  </TouchableOpacity>
+              		</View>
+            	  }
+            	/>
+            }
+          </Fragment>
+        </View>
+
+    );
 };
 
 export default Scanner;
