@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "short_name": "Tab2QR Extension",
+  "name": "Chrome extension for Tab2QR app",
+  "icons": {
+    "192": "logo192.png",
+    "512": "logo512.png"
+  },
+  "browser_action": {
+    "default_title": "Tab2QR",
+    "default_popup": "index.html"
+  },
+  "permissions": ["tabs"]
+}
