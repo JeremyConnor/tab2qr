@@ -1,11 +1,14 @@
 /* global chrome */
 
 import React, { useState, useEffect } from "react";
-import { QRCode } from "react-qrcode-logo";
+import { Button, Col, Row } from "antd";
+import AnimatedQR from "./AnimatedQR";
+import config from "../config";
 import "./Body.css";
 
 function Body(props) {
   const [tabUrl, setTabUrl] = useState("");
+  const [currentTabQRVisible, setCurrentTabQRVisible] = useState(false);
 
   useEffect(() => {
     // only if running in chrome extension mode fetch
@@ -25,12 +28,58 @@ function Body(props) {
     }
   }, []);
 
+  const onCurrentTabClicked = () => {
+    setCurrentTabQRVisible(true);
+  };
+
+  const renderChoiceScreen = (
+    <div style={{ paddingBottom: 20 }}>
+      <div className="title">Generate QR code for</div>
+      <Row
+        gutter={10}
+        justify="center"
+        style={{ paddingTop: 10, paddingBottom: 10 }}
+      >
+        <Col>
+          <Button
+            type="primary"
+            onClick={onCurrentTabClicked}
+            style={{ backgroundColor: "#ba68c8", border: 0 }}
+          >
+            Current Tab
+          </Button>
+        </Col>
+        <Col>
+          <Button href="/export.html" target="blank">
+            Current Window
+          </Button>
+        </Col>
+      </Row>
+      <hr color="#ba68c8" style={{ height: 0.1 }} />
+      <Row justify="center">
+        <Col style={{ color: "rgba(0,0,0,0.5)" }}>
+          version {config.extension.version}
+        </Col>
+      </Row>
+    </div>
+  );
+
   return (
     <div className="main">
-      <div className="qr">
-        <QRCode value={tabUrl} ecLevel="M" size={200} qrStyle="dots" />
-      </div>
-      <div className="body-footer-text">Generated QR Code</div>
+      {currentTabQRVisible ? (
+        // quick fix
+        <div
+          style={{
+            width: config.extension.maxWidth,
+            display: "flex",
+            paddingLeft: 27,
+          }}
+        >
+          <AnimatedQR encode={tabUrl} />
+        </div>
+      ) : (
+        renderChoiceScreen
+      )}
     </div>
   );
 }

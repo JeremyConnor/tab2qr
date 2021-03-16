@@ -1,4 +1,8 @@
 .main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding-top: 10px;
 }
 
@@ -9,8 +13,8 @@
   font-size: 14px;
 }
 
-.qr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.main .title {
+  font-size: 16px;
+  text-align: center;
+  color: black;
 }
