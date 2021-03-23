@@ -1,10 +1,15 @@
 import Header from "./components/Header";
 import Body from "./components/Body";
-import "./App.css";
+import config from "./config";
 
 function App() {
   return (
-    <div className="rounded">
+    <div
+      style={{
+        maxWidth: config.extension.maxWidth,
+        width: config.extension.maxWidth,
+      }}
+    >
       <Header />
       <Body />
     </div>

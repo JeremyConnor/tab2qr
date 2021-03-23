@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import ListTabs from "./components/ListTabs";
 import "antd/dist/antd.css";
 import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ListTabs />
   </React.StrictMode>,
   document.getElementById("root")
 );
