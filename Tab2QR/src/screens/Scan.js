@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Alert } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
-import moment from "moment";
-import QRLoopScanner from "../components/QRLoopScanner";
-import ScanHistory from "../db/modal";
+import React from 'react';
+import {StyleSheet, View, Alert} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
+import moment from 'moment';
+import QRLoopScanner from '../components/QRLoopScanner';
+import ScanHistory from '../db/modal';
 
 export default function Scan(props) {
   const [result, setResult] = React.useState(null);
@@ -11,25 +11,20 @@ export default function Scan(props) {
   const isFocused = useIsFocused();
 
   const validate = (jsonValue) => {
-    // for (let key in jsonValue) {
-    //   if (key === "incognito") {
-    //     if (typeof jsonValue[key] !== typeof true) {
-    //       return false;
-    //     }
-    //   } else if (key === "tabs") {
-    //   if (key === "tabs") {
-    //     if (!Array.isArray(jsonValue[key])) {
-    //       return false;
-    //     }
-    //   } else {
-    //     return false;
-    //   }
-    // }
+    for (let key in jsonValue) {
+      if (key === 'tabs') {
+        if (!Array.isArray(jsonValue[key])) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
     return true;
   };
 
   const onResult = (newResult) => {
-    console.log("newResult", typeof(newResult));
+    console.log('newResult', typeof newResult);
     try {
       let scannedResult = JSON.parse(newResult);
       if (validate(scannedResult)) {
@@ -44,12 +39,12 @@ export default function Scan(props) {
   };
 
   const onError = (error) => {
-    console.warn("QRLoopScanner.js > Scan.js ERROR", error);
+    console.warn('QRLoopScanner.js > Scan.js ERROR', error);
     setErrorOccurred(true);
   };
 
   const onPressSave = async () => {
-    const _title = `scanned ${moment().format("DD/MM/YY hh:ss a")}`;
+    const _title = `scanned ${moment().format('DD/MM/YY hh:ss a')}`;
 
     const toInsert = {
       title: _title,
@@ -57,13 +52,13 @@ export default function Scan(props) {
       windowInfo: result,
     };
 
-    console.log("toInsert", toInsert);
+    console.log('toInsert', toInsert);
 
     // make a database entry
     try {
       await ScanHistory.create(toInsert);
     } catch (e) {
-      console.warn("Database error");
+      console.warn('Database error');
       console.log(e);
     } finally {
       // clear result from here
@@ -81,36 +76,36 @@ export default function Scan(props) {
 
   const renderResultScreen = () => {
     Alert.alert(
-      "Scanned successfully",
-      "Do you want to save the list ?",
+      'Scanned successfully',
+      'Do you want to save the list ?',
       [
         {
-          text: "Cancel",
-          style: "cancel",
+          text: 'Cancel',
+          style: 'cancel',
           onPress: onPressCancel,
         },
         {
-          text: "OK",
-          style: "positive",
+          text: 'OK',
+          style: 'positive',
           onPress: onPressSave,
         },
       ],
-      { cancelable: false }
+      {cancelable: false},
     );
   };
 
   const renderErrorScreen = () => {
     Alert.alert(
-      "Error",
-      "QR code is either not supported or invalid",
+      'Error',
+      'QR code is either not supported or invalid',
       [
         {
-          text: "Scan again",
-          style: "positive",
+          text: 'Scan again',
+          style: 'positive',
           onPress: onPressScanAgain,
         },
       ],
-      { cancelable: false }
+      {cancelable: false},
     );
   };
 
@@ -130,8 +125,8 @@ export default function Scan(props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "black",
-    justifyContent: "center",
+    backgroundColor: 'black',
+    justifyContent: 'center',
     padding: 25,
   },
 });

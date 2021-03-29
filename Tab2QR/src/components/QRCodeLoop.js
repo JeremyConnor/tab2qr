@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import { View } from "react-native";
-import QRCode from "react-native-qrcode-svg";
+import React, {PureComponent} from 'react';
+import {View} from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 
 export default class QRCodeLoop extends PureComponent {
   state = {
@@ -8,9 +8,9 @@ export default class QRCodeLoop extends PureComponent {
   };
 
   componentDidMount() {
-    const nextFrame = ({ frame }, { frames }) => {
+    const nextFrame = ({frame}, {frames}) => {
       frame = (frame + 1) % frames.length;
-      return { frame };
+      return {frame};
     };
 
     let lastT;
@@ -31,17 +31,16 @@ export default class QRCodeLoop extends PureComponent {
   _raf = React.createRef();
 
   render() {
-    const { frame } = this.state;
-    const { frames, size, quietZone } = this.props;
+    const {frame} = this.state;
+    const {frames, size, quietZone} = this.props;
 
     return (
-      <View style={{ position: "relative", width: size, height: size }}>
+      <View style={{position: 'relative', width: size, height: size}}>
         {frames.map((chunk, i) => (
           <View
             key={i}
-            style={{ position: "absolute", opacity: i === frame ? 1 : 0 }}
-          >
-            <QRCode value={chunk} size={size} quietZone={quietZone} />
+            style={{position: 'absolute', opacity: i === frame ? 1 : 0}}>
+            <QRCode value={chunk} ecl="M" size={size} quietZone={quietZone} />
           </View>
         ))}
       </View>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { QRCode } from "react-qrcode-logo";
+import QRCode from "qrcode.react";
 import { dataToFrames } from "qrloop";
 import config from "../config";
 import "./AnimatedQR.css";
@@ -47,9 +47,8 @@ class QRCodeLoop extends React.PureComponent {
           >
             <QRCode
               value={chunk}
-              ecLevel={config.qr.correctionLevel}
+              level={config.qr.correctionLevel}
               size={overrideSize || config.qr.size}
-              qrStyle={config.qr.bitShape}
             />
           </div>
         ))}

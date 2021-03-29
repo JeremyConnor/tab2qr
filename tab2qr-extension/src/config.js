@@ -10,7 +10,7 @@ const config = {
     fps: 5,
     frameSize: 50,
     repeatFrequency: 4,
-    bitShape: "dots",
+    bitShape: "square",
   },
 };
 

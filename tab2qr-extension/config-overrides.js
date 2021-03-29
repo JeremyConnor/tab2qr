@@ -16,6 +16,11 @@ const multipleEntry = require("react-app-rewire-multiple-entry")([
     template: "public/index.html",
     outPath: "/export.html",
   },
+  {
+    entry: "src/scan.js",
+    template: "public/index.html",
+    outPath: "/scan.html",
+  },
 ]);
 
 const devServerConfig = () => (config) => {

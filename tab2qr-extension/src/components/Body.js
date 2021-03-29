@@ -32,6 +32,12 @@ function Body(props) {
     setCurrentTabQRVisible(true);
   };
 
+  const formatdataToSend = (url) => {
+    return JSON.stringify({
+      tabs: [url],
+    });
+  };
+
   const renderChoiceScreen = (
     <div style={{ paddingBottom: 20 }}>
       <div className="title">Generate QR code for</div>
@@ -67,15 +73,15 @@ function Body(props) {
   return (
     <div className="main">
       {currentTabQRVisible ? (
-        // quick fix
         <div
           style={{
             width: config.extension.maxWidth,
             display: "flex",
-            paddingLeft: 27,
+            paddingLeft: "14%",
+            paddingBottom: 20,
           }}
         >
-          <AnimatedQR encode={tabUrl} />
+          <AnimatedQR encode={formatdataToSend(tabUrl)} />
         </div>
       ) : (
         renderChoiceScreen

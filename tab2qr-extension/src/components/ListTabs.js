@@ -18,8 +18,7 @@ function ListTabs(props) {
   const [tabs, setTabs] = useState([]);
   const [selected, setSelected] = useState({});
   const [qrVisible, setQrVisible] = useState(false);
-
-  let dataToSend = "";
+  const [dataToSend, setDataToSend] = useState("");
 
   useEffect(() => {
     if (chrome.windows) {
@@ -54,14 +53,18 @@ function ListTabs(props) {
     });
   };
 
-  const getSelectedTabs = () => {
+  const getSelectedTabs = (callback) => {
+    console.log("SELECTED", selected);
+    console.log("TABS", tabs);
+
     let sendTabsList = { tabs: [] };
     Object.keys(selected).forEach((eachId) => {
       if (selected[eachId].checked) {
         sendTabsList.tabs.push(tabs[selected[eachId].listIndex].url);
       }
     });
-    return sendTabsList;
+    setDataToSend(JSON.stringify(sendTabsList));
+    callback(sendTabsList);
   };
 
   const onSelectAll = () => {
@@ -93,12 +96,12 @@ function ListTabs(props) {
   };
 
   const onQRModalOpen = () => {
-    const res = getSelectedTabs();
-    if (res.tabs.length === 0) onQRModalClose();
-    else {
-      dataToSend = JSON.stringify(res);
-      setQrVisible(true);
-    }
+    getSelectedTabs((res) => {
+      if (res.tabs.length === 0) onQRModalClose();
+      else {
+        setQrVisible(true);
+      }
+    });
   };
 
   const toggleSelection = (tabId, checked) => {
@@ -138,7 +141,6 @@ function ListTabs(props) {
         width={400}
       >
         {qrVisible && (
-          // quick fix
           <div style={{ paddingTop: 20 }}>
             <Typography.Title
               level={4}
@@ -148,8 +150,8 @@ function ListTabs(props) {
             </Typography.Title>
             <div
               style={{
-                paddingRight: "75%",
-                paddingBottom: "30%",
+                paddingRight: "70%",
+                paddingBottom: "20%",
                 justifyContent: "center",
               }}
             >

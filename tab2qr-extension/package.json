@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "antd": "^4.14.0",
+    "qrcode.react": "^1.0.1",
     "qrloop": "^1.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-qrcode-logo": "^2.2.1",
+    "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3"
   },
