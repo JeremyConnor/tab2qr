@@ -1,5 +1,5 @@
-import * as SQLite from "expo-sqlite";
-import { BaseModel, types } from "expo-sqlite-orm";
+import * as SQLite from 'expo-sqlite';
+import {BaseModel, types} from 'expo-sqlite-orm';
 
 export default class ScanHistory extends BaseModel {
   constructor(obj) {
@@ -7,24 +7,24 @@ export default class ScanHistory extends BaseModel {
   }
 
   static get database() {
-    return async () => SQLite.openDatabase("database.db");
+    return async () => SQLite.openDatabase('database.db');
   }
 
   static get tableName() {
-    return "savedWindows";
+    return 'savedWindows';
   }
 
   static get columnMapping() {
     return {
-      id: { type: types.INTEGER, primary_key: true }, // For while only supports id as primary key
-      title: { type: types.TEXT, unique: true, not_null: true },
+      id: {type: types.INTEGER, primary_key: true},
+      title: {type: types.TEXT, unique: true, not_null: true},
       timestamp: {
         type: types.INTEGER,
         default: () => Math.round(Date.now() / 1000),
       },
       windowInfo: {
         type: types.JSON,
-        default: () => ({ incognito: false, tabs: [] }),
+        default: () => ({incognito: false, tabs: []}),
       },
     };
   }

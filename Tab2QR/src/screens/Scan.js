@@ -1,13 +1,17 @@
 import React from 'react';
 import {StyleSheet, View, Alert} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
+import {Provider, Portal} from 'react-native-paper';
 import moment from 'moment';
-import QRLoopScanner from '../components/QRLoopScanner';
+import QRScanner from '../components/QRScanner';
+import DisplayUrls from '../components/DisplayUrls';
 import ScanHistory from '../db/modal';
 
 export default function Scan(props) {
   const [result, setResult] = React.useState(null);
   const [errorOccurred, setErrorOccurred] = React.useState(false);
+  const [showScannedTabs, setShowScannedTabs] = React.useState(false);
+  const [showResultAlert, setShowResultAlert] = React.useState(false);
   const isFocused = useIsFocused();
 
   const validate = (jsonValue) => {
@@ -24,11 +28,11 @@ export default function Scan(props) {
   };
 
   const onResult = (newResult) => {
-    console.log('newResult', typeof newResult);
     try {
       let scannedResult = JSON.parse(newResult);
       if (validate(scannedResult)) {
         setResult(scannedResult);
+        setShowResultAlert(true);
       } else {
         // invalid json data
         setErrorOccurred(true);
@@ -52,8 +56,6 @@ export default function Scan(props) {
       windowInfo: result,
     };
 
-    console.log('toInsert', toInsert);
-
     // make a database entry
     try {
       await ScanHistory.create(toInsert);
@@ -61,13 +63,19 @@ export default function Scan(props) {
       console.warn('Database error');
       console.log(e);
     } finally {
-      // clear result from here
-      setResult(null);
+      showDefaultScreen();
     }
   };
 
-  const onPressCancel = () => {
+  const showDefaultScreen = () => {
+    setShowResultAlert(false);
+    setShowScannedTabs(false);
     setResult(null);
+  };
+
+  const onPressCancel = () => {
+    setShowResultAlert(false);
+    setShowScannedTabs(true);
   };
 
   const onPressScanAgain = () => {
@@ -112,10 +120,21 @@ export default function Scan(props) {
   if (isFocused) {
     if (errorOccurred) {
       return <View style={styles.root}>{renderErrorScreen()}</View>;
-    } else if (result) {
+    } else if (showResultAlert) {
       return <View style={styles.root}>{renderResultScreen()}</View>;
     } else {
-      return <QRLoopScanner onResult={onResult} onError={onError} />;
+      return (
+        <Provider>
+          <Portal>
+            <QRScanner onResult={onResult} onError={onError} />
+            <DisplayUrls
+              visible={showScannedTabs}
+              data={result}
+              onClose={showDefaultScreen}
+            />
+          </Portal>
+        </Provider>
+      );
     }
   } else {
     return null;

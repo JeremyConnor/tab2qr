@@ -1,30 +1,30 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Camera } from "expo-camera";
-import * as Permissions from "expo-permissions";
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {Camera} from 'expo-camera';
+import * as Permissions from 'expo-permissions';
 import {
   parseFramesReducer,
   areFramesComplete,
   framesToData,
   progressOfFrames,
-} from "qrloop";
-import ProgressCircle from "react-native-progress-circle";
-import ScannerBox from "./ScannerBox";
+} from 'qrloop';
+import ProgressCircle from 'react-native-progress-circle';
+import ScannerBox from './ScannerBox';
 
-export default class QRLoopScanner extends React.Component {
+export default class QRScanner extends React.Component {
   state = {
     hasCameraPermission: null,
     progress: 0,
   };
 
   async componentDidMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === "granted" });
+    const {status} = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({hasCameraPermission: status === 'granted'});
   }
 
   frames = null;
 
-  onBarCodeScanned = ({ data }) => {
+  onBarCodeScanned = ({data}) => {
     try {
       const frames = (this.frames = parseFramesReducer(this.frames, data));
       if (areFramesComplete(frames)) {
@@ -43,7 +43,7 @@ export default class QRLoopScanner extends React.Component {
   };
 
   render() {
-    const { hasCameraPermission, progress } = this.state;
+    const {hasCameraPermission, progress} = this.state;
 
     if (hasCameraPermission === null) {
       return (
@@ -68,8 +68,7 @@ export default class QRLoopScanner extends React.Component {
       <Camera
         style={styles.root}
         type={Camera.Constants.Type.back}
-        onBarCodeScanned={this.onBarCodeScanned}
-      >
+        onBarCodeScanned={this.onBarCodeScanned}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Scan the QR code</Text>
         </View>
@@ -82,9 +81,8 @@ export default class QRLoopScanner extends React.Component {
           borderWidth={8}
           color="#31A05F"
           shadowColor="white"
-          bgColor="white"
-        >
-          <Text style={{ fontSize: 18 }}>{(progress * 100).toFixed(0)}%</Text>
+          bgColor="white">
+          <Text style={{fontSize: 18}}>{(progress * 100).toFixed(0)}%</Text>
         </ProgressCircle>
       </Camera>
     );
@@ -94,17 +92,17 @@ export default class QRLoopScanner extends React.Component {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     padding: 10,
-    backgroundColor: "black",
+    backgroundColor: 'black',
   },
   title: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
   },
   progressText: {
-    color: "white",
+    color: 'white',
     fontSize: 20,
   },
   progress: {
@@ -114,8 +112,8 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 15,
     borderRadius: 5,
-    backgroundColor: "rgba(0,0,0,0.4)",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
