@@ -14,7 +14,7 @@ Users can select any number of Tabs to share to their mobile phone. Users also g
 
 ### Installing the app
 * Open the terminal and move to ```Tab2QR``` folder.
-* Run ```yarn add .``` to install teh dependencies.
+* Run ```yarn add .``` to install the dependencies.
 * Run ```expo start``` to start the expo server
 
 ### Features provided by the browser extension
