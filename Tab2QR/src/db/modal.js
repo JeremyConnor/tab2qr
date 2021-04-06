@@ -6,14 +6,17 @@ export default class ScanHistory extends BaseModel {
     super(obj);
   }
 
+  // Fetch database.
   static get database() {
     return async () => SQLite.openDatabase('database.db');
   }
 
+  // Fetch the table "savedWindows".
   static get tableName() {
     return 'savedWindows';
   }
 
+  // Return data to render inside a card in "Saved" section.
   static get columnMapping() {
     return {
       id: {type: types.INTEGER, primary_key: true},

@@ -8,6 +8,11 @@ export default class QRCodeLoop extends PureComponent {
   };
 
   componentDidMount() {
+    /**
+     * Update frame.
+     * Concatenate the existing frame with the
+     * newly scanned frame.
+     */
     const nextFrame = ({frame}, {frames}) => {
       frame = (frame + 1) % frames.length;
       return {frame};

@@ -8,6 +8,7 @@ import Save from '../screens/Save';
 
 const Tab = createMaterialBottomTabNavigator();
 
+// Render the bottom Navigation Bar.
 export default function RootNavigation(props) {
   const buttons = [
     {

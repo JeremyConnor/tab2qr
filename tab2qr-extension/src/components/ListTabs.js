@@ -35,6 +35,7 @@ function ListTabs(props) {
     }
   }, []);
 
+  // Fetch List of Tab URLs from current window.
   const getTabsList = (callback) => {
     chrome.windows.getCurrent((window) => {
       let tabsData = [];
@@ -53,6 +54,7 @@ function ListTabs(props) {
     });
   };
 
+  // Create JSON of all the selected Tab URLs.
   const getSelectedTabs = (callback) => {
     console.log("SELECTED", selected);
     console.log("TABS", tabs);
@@ -67,6 +69,7 @@ function ListTabs(props) {
     callback(sendTabsList);
   };
 
+  // Select all the Tab URLs from current window.
   const onSelectAll = () => {
     let newState = {};
     Object.keys(selected).forEach((id) => {
@@ -79,6 +82,7 @@ function ListTabs(props) {
     }));
   };
 
+  // Clear all the selections.
   const onClearAll = () => {
     let newState = {};
     Object.keys(selected).forEach((id) => {
@@ -91,10 +95,12 @@ function ListTabs(props) {
     }));
   };
 
+  // Close QR Modal
   const onQRModalClose = () => {
     setQrVisible(false);
   };
 
+  // Open QR Modal
   const onQRModalOpen = () => {
     getSelectedTabs((res) => {
       if (res.tabs.length === 0) onQRModalClose();
@@ -104,6 +110,7 @@ function ListTabs(props) {
     });
   };
 
+  // Update the selected Tab URLs
   const toggleSelection = (tabId, checked) => {
     setSelected((previousSelection) => ({
       ...previousSelection,
@@ -132,6 +139,7 @@ function ListTabs(props) {
     );
   };
 
+  // Modal for QR Code
   const QRCodeUI = () => {
     return (
       <Modal
@@ -163,6 +171,7 @@ function ListTabs(props) {
     );
   };
 
+  // List all the Tab URLs along with checkbox
   const ListItem = (item) => {
     const onToggleChecked = (e) => {
       toggleSelection(item.id, e.target.checked);

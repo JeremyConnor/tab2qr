@@ -8,6 +8,7 @@ const BoxCorner = (props) => {
   return <View style={[styles.box, { ...additionalStyle }]} />;
 };
 
+// Render area to scan QR code.
 export default function ScannerBox(props) {
   return (
     <View style={styles.container}>

@@ -7,6 +7,9 @@ import QRScanner from '../components/QRScanner';
 import DisplayUrls from '../components/DisplayUrls';
 import ScanHistory from '../db/modal';
 
+/**
+ * Render "Scan" screen.
+ */
 export default function Scan(props) {
   const [result, setResult] = React.useState(null);
   const [errorOccurred, setErrorOccurred] = React.useState(false);
@@ -14,6 +17,7 @@ export default function Scan(props) {
   const [showResultAlert, setShowResultAlert] = React.useState(false);
   const isFocused = useIsFocused();
 
+  // Validate the JSON after scanning QR code.
   const validate = (jsonValue) => {
     for (let key in jsonValue) {
       if (key === 'tabs') {
@@ -27,6 +31,7 @@ export default function Scan(props) {
     return true;
   };
 
+  // Update the result hook after scanning QR code.
   const onResult = (newResult) => {
     try {
       let scannedResult = JSON.parse(newResult);
@@ -34,19 +39,22 @@ export default function Scan(props) {
         setResult(scannedResult);
         setShowResultAlert(true);
       } else {
-        // invalid json data
+        // Invalid JSON data.
         setErrorOccurred(true);
       }
     } catch (e) {
+      // Handle error.
       setErrorOccurred(true);
     }
   };
 
+  // Handle error.
   const onError = (error) => {
     console.warn('QRLoopScanner.js > Scan.js ERROR', error);
     setErrorOccurred(true);
   };
 
+  // Save the scanned QR in the database.
   const onPressSave = async () => {
     const _title = `scanned ${moment().format('DD/MM/YY hh:ss a')}`;
 
@@ -56,10 +64,11 @@ export default function Scan(props) {
       windowInfo: result,
     };
 
-    // make a database entry
+    // Update the database.
     try {
       await ScanHistory.create(toInsert);
     } catch (e) {
+      // Handle error.
       console.warn('Database error');
       console.log(e);
     } finally {
@@ -67,12 +76,17 @@ export default function Scan(props) {
     }
   };
 
+  // Reset conditions to default.
   const showDefaultScreen = () => {
     setShowResultAlert(false);
     setShowScannedTabs(false);
     setResult(null);
   };
 
+  /**
+   * Handle Cancel button.
+   * Set condition to true to display scanned URLs.
+   */
   const onPressCancel = () => {
     setShowResultAlert(false);
     setShowScannedTabs(true);

@@ -17,6 +17,7 @@ export default class QRScanner extends React.Component {
     progress: 0,
   };
 
+  // Access permission to access Camera.
   async componentDidMount() {
     const {status} = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({hasCameraPermission: status === 'granted'});
@@ -28,11 +29,13 @@ export default class QRScanner extends React.Component {
     try {
       const frames = (this.frames = parseFramesReducer(this.frames, data));
       if (areFramesComplete(frames)) {
+        // Convert to string once the QR is scanned completely.
         this.props.onResult(framesToData(frames).toString());
         this.setState({
           progress: 0,
         });
       } else {
+        // Update state with new frames.
         this.setState({
           progress: progressOfFrames(frames),
         });
@@ -45,6 +48,7 @@ export default class QRScanner extends React.Component {
   render() {
     const {hasCameraPermission, progress} = this.state;
 
+    // Request permission to access Camera.
     if (hasCameraPermission === null) {
       return (
         <View style={styles.root}>
@@ -53,6 +57,7 @@ export default class QRScanner extends React.Component {
       );
     }
 
+    // Permission denied to access Camera.
     if (hasCameraPermission === false) {
       return (
         <View style={styles.root}>

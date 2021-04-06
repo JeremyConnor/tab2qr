@@ -5,6 +5,7 @@ import {Ionicons} from '@expo/vector-icons';
 import uuid from 'uuid-random';
 import TabCard from './TabCard';
 
+// Display all the URLs as a list.
 export default function DisplayUrls(props) {
   const renderItem = ({item: tabUrl}) => <TabCard url={tabUrl} />;
 

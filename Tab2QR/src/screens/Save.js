@@ -5,6 +5,10 @@ import SavedItemExpanded from "../components/SavedItemExpanded";
 
 const Stack = createStackNavigator();
 
+/**
+ * Screen to display "Saved" section.
+ * Renders list of URLs saved previosuly in the database.
+ */
 export default function Save(props) {
   return (
     <Stack.Navigator headerMode="none" initialRouteName="SavedItemsList">
