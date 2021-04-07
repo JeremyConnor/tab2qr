@@ -9,7 +9,7 @@ import {
   progressOfFrames,
 } from 'qrloop';
 import ProgressCircle from 'react-native-progress-circle';
-import ScannerBox from './ScannerBox';
+import ScannerBox from '../ScannerBox/ScannerBox';
 
 export default class QRScanner extends React.Component {
   state = {

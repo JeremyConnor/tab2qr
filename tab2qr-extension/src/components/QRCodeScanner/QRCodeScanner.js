@@ -1,5 +1,4 @@
 import React from "react";
-// import { Typography, LinearProgress } from "@material-ui/core";
 import { Progress } from "antd";
 import QrReader from "react-qr-reader";
 import {
@@ -18,13 +17,11 @@ export default class QRCodeScanner extends React.Component {
 
   handleScan = (data) => {
     // ensures that scan only happens after user presses "Scan New"
-    // console.log(this.props.getScanNew());
     if (this.props.getScanNew()) {
       if (data) {
         try {
           const frames = (this.frames = parseFramesReducer(this.frames, data));
           if (areFramesComplete(frames)) {
-            // changed here
             this.props.onQRScanned(framesToData(frames).toString());
             this.setState({
               progress: 0,

@@ -1,7 +1,6 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import SavedItemsList from "../components/SavedItemsList";
-import SavedItemExpanded from "../components/SavedItemExpanded";
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import {SavedItemsList, SavedItemExpanded} from '../components';
 
 const Stack = createStackNavigator();
 

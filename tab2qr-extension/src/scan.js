@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ScanQR from "./components/ScanQR";
 import "antd/dist/antd.css";
 import "./index.css";
+import ScanQR from "./components/ScanQR/ScanQR";
 
 ReactDOM.render(
   <React.StrictMode>

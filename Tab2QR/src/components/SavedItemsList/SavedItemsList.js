@@ -10,7 +10,7 @@ import {Text, Surface} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import uuid from 'uuid-random';
 import Moment from 'react-moment';
-import ScanHistory from '../db/modal';
+import ScanHistory from '../../db/modal';
 
 /**
  * Item format :
@@ -23,7 +23,7 @@ import ScanHistory from '../db/modal';
  * }
  * Fetch list of URLs inside a particular Card.
  */
-const ListItemCard = ({item, deleteItem}) => {
+export const ListItemCard = ({item, deleteItem}) => {
   const navigation = useNavigation();
 
   const onPress = () => {

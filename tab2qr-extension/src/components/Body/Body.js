@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row } from "antd";
-import AnimatedQR from "./AnimatedQR";
-import config from "../config";
+import AnimatedQR from "../AnimatedQR/AnimatedQR";
+import config from "../../config";
 import "./Body.css";
 
 function Body(props) {

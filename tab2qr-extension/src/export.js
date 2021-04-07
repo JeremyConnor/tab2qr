@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ListTabs from "./components/ListTabs";
 import "antd/dist/antd.css";
 import "./index.css";
+import ListTabs from "./components/ListTabs/ListTabs";
 
 ReactDOM.render(
   <React.StrictMode>

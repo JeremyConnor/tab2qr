@@ -2,10 +2,17 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "test": "jest",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -13,7 +20,7 @@
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.2",
     "buffer": "^6.0.3",
-    "expo": "~40.0.0",
+    "expo": "^40.0.1",
     "expo-camera": "~9.1.0",
     "expo-linking": "~2.0.1",
     "expo-permissions": "~10.0.0",
@@ -41,7 +48,10 @@
     "uuid-random": "^1.3.2"
   },
   "devDependencies": {
-    "@babel/core": "~7.12.10"
+    "@babel/core": "~7.12.10",
+    "@testing-library/react-native": "^7.2.0",
+    "jest-expo": "^40.0.2",
+    "react-test-renderer": "^17.0.2"
   },
   "private": true
 }

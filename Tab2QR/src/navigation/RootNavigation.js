@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import uuid from 'uuid-random';
 import Scan from '../screens/Scan';
 import Save from '../screens/Save';
 
@@ -25,6 +26,7 @@ export default function RootNavigation(props) {
 
   const NavScreen = ({name, component, icon}) => (
     <Tab.Screen
+      key={uuid()}
       name={name}
       component={component}
       options={{

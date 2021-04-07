@@ -3,8 +3,7 @@ import {StyleSheet, View, Alert} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {Provider, Portal} from 'react-native-paper';
 import moment from 'moment';
-import QRScanner from '../components/QRScanner';
-import DisplayUrls from '../components/DisplayUrls';
+import {QRScanner, DisplayUrls} from '../components';
 import ScanHistory from '../db/modal';
 
 /**

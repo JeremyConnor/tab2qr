@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { PureComponent, useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 import { dataToFrames } from "qrloop";
-import config from "../config";
+import config from "../../config";
 import "./AnimatedQR.css";
 
-class QRCodeLoop extends React.PureComponent {
+class QRCodeLoop extends PureComponent {
   state = { frame: 0 };
 
   componentDidMount() {

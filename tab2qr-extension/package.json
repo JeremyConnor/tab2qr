@@ -2,6 +2,13 @@
   "name": "tab2qr-extension",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "environment-jsdom-fourteen",
+    "setupFiles": [
+      "jsdom-worker"
+    ]
+  },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.14.0",
@@ -38,8 +45,15 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "chrome-api-mock": "^0.0.2",
     "copy-webpack-plugin": "^6.4.1",
     "customize-cra": "^1.0.0",
+    "jest-canvas-mock": "^2.3.1",
+    "jest-environment-jsdom-fourteen": "^1.0.1",
+    "jsdom-worker": "^0.2.1",
+    "node-fetch": "^2.6.1",
     "react-app-rewire-multiple-entry": "^2.2.1",
     "react-app-rewired": "^2.1.8"
   }

@@ -12,7 +12,7 @@ import {
   Button,
   Modal,
 } from "antd";
-import AnimatedQR from "./AnimatedQR";
+import AnimatedQR from "../AnimatedQR/AnimatedQR";
 
 function ListTabs(props) {
   const [tabs, setTabs] = useState([]);
@@ -48,7 +48,6 @@ function ListTabs(props) {
             icon: favIconUrl,
           });
         });
-        console.log(tabsData);
         callback(tabsData);
       });
     });
@@ -121,6 +120,7 @@ function ListTabs(props) {
     }));
   };
 
+  // Header component containing buttons
   const Header = () => {
     return (
       <Row justify="space-between" style={{ paddingBottom: 20 }}>
@@ -177,13 +177,18 @@ function ListTabs(props) {
       toggleSelection(item.id, e.target.checked);
     };
 
+    // icon for each page displayed
     const renderIcon = <Avatar src={item.icon} />;
 
-    const renderUrl = (
-      <Typography.Paragraph ellipsis={true}>
-        <a href={item.url}>{item.url}</a>
-      </Typography.Paragraph>
-    );
+    // renders text such that if exceeds the max width
+    // of parent container, it is shortened
+    const renderText = (text, isLink) => {
+      let renderedText = (
+        <Typography.Paragraph ellipsis={true}>{text}</Typography.Paragraph>
+      );
+
+      return isLink ? <a href={text}>{renderedText}</a> : renderedText;
+    };
 
     return (
       <List.Item
@@ -197,8 +202,8 @@ function ListTabs(props) {
       >
         <List.Item.Meta
           avatar={renderIcon}
-          title={item.title}
-          description={renderUrl}
+          title={renderText(item.title, false)}
+          description={renderText(item.url, true)}
         />
       </List.Item>
     );

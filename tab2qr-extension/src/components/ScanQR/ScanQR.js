@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { List, Collapse, Row, Button, Typography } from "antd";
 import { DeleteFilled } from "@ant-design/icons";
-import QRCodeScanner from "./QRCodeScanner";
+import QRCodeScanner from "../QRCodeScanner/QRCodeScanner";
 
 const { Panel } = Collapse;
 
@@ -95,7 +95,7 @@ function ScanQR(props) {
     handleDialogueClose();
   };
 
-  /** 
+  /**
    * This function is passed to QRCodeScanner to inform
    * if it needs to send the data back to parent
    */
@@ -118,7 +118,7 @@ function ScanQR(props) {
       </Button>
     </div>
   );
- 
+
   const ScannedList = () => {
     const renderUrl = (url) => (
       <Typography.Paragraph ellipsis={true}>
@@ -226,11 +226,16 @@ function ScanQR(props) {
             justifyContent: "center",
           }}
         >
-          <QRCodeScanner
-            onQRScanned={onQRScanned}
-            onQRScanError={onQRScanError}
-            getScanNew={getScanNew}
-          />
+          {
+            // for supporting tests
+            props.mock == null && (
+              <QRCodeScanner
+                onQRScanned={onQRScanned}
+                onQRScanError={onQRScanError}
+                getScanNew={getScanNew}
+              />
+            )
+          }
         </div>
         <div
           style={{

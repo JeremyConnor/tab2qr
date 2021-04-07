@@ -18,11 +18,11 @@ import {
 import uuid from 'uuid-random';
 import Moment from 'react-moment';
 import {dataToFrames} from 'qrloop';
-import AnimatedQR from './AnimatedQR';
-import TabCard from './TabCard';
-import ScanHistory from '../db/modal';
+import {AnimatedQR} from '../AnimatedQR/AnimatedQR';
+import {TabCard} from '../TabCard/TabCard';
+import ScanHistory from '../../db/modal';
 
-const FABButton = (props) => {
+export const FABButton = (props) => {
   const {onDelete, onRename, onSendAll} = props;
   const [state, setState] = React.useState({open: false});
   const {open} = state;
@@ -128,7 +128,6 @@ export default function SavedItemExpanded(props) {
   const onSendSingle = React.useCallback(
     (url) => {
       const value = JSON.stringify({
-        incognito: data.windowInfo.incognito,
         tabs: [url],
       });
       showQRModal(value);
@@ -176,12 +175,14 @@ export default function SavedItemExpanded(props) {
               </View>
             </View>
 
-            <FlatList
-              data={data.windowInfo.tabs}
-              renderItem={renderItem}
-              ListFooterComponent={renderFooter}
-              keyExtractor={keyExtractor}
-            />
+            {props.mock == null && (
+              <FlatList
+                data={data.windowInfo.tabs}
+                renderItem={renderItem}
+                ListFooterComponent={renderFooter}
+                keyExtractor={keyExtractor}
+              />
+            )}
           </View>
 
           <FABButton
@@ -194,12 +195,14 @@ export default function SavedItemExpanded(props) {
             visible={QRModalvisible}
             onDismiss={hideQRModal}
             contentContainerStyle={styles.centerItems}>
-            <AnimatedQR
-              frames={frames}
-              fps={5}
-              size={QRCodeSize}
-              quietZone={20}
-            />
+            {props.mock == null && (
+              <AnimatedQR
+                frames={frames}
+                fps={5}
+                size={QRCodeSize}
+                quietZone={20}
+              />
+            )}
           </Modal>
 
           <Modal
