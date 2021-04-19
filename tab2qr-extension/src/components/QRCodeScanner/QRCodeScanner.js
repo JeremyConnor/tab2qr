@@ -53,19 +53,21 @@ export default class QRCodeScanner extends React.Component {
           justifyContent: "center",
         }}
       >
-        <QrReader
-          delay={200} // for 5 fps
-          onError={this.handleError}
-          onScan={this.handleScan}
-          style={{
-            width: "70%",
-            borderWidth: 10,
-            borderColor: "blue",
-            alignItems: "center",
-            justifyContent: "center",
-            alignSelf: "center",
-          }}
-        />
+        {!this.props.mock && (
+          <QrReader
+            delay={200} // for 5 fps
+            onError={this.handleError}
+            onScan={this.handleScan}
+            style={{
+              width: "70%",
+              borderWidth: 10,
+              borderColor: "blue",
+              alignItems: "center",
+              justifyContent: "center",
+              alignSelf: "center",
+            }}
+          />
+        )}
         <div
           style={{
             display: "flex",

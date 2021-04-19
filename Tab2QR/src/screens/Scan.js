@@ -14,10 +14,18 @@ export default function Scan(props) {
   const [errorOccurred, setErrorOccurred] = React.useState(false);
   const [showScannedTabs, setShowScannedTabs] = React.useState(false);
   const [showResultAlert, setShowResultAlert] = React.useState(false);
-  const isFocused = useIsFocused();
+  const isFocused = props.mock ? true : useIsFocused();
 
   // Validate the JSON after scanning QR code.
   const validate = (jsonValue) => {
+    if (
+      jsonValue == null ||
+      typeof jsonValue !== 'object' ||
+      Object.keys(jsonValue).length < 1
+    ) {
+      return false;
+    }
+
     for (let key in jsonValue) {
       if (key === 'tabs') {
         if (!Array.isArray(jsonValue[key])) {
@@ -33,6 +41,11 @@ export default function Scan(props) {
   // Update the result hook after scanning QR code.
   const onResult = (newResult) => {
     try {
+      // if being tested, simulating the saving procedure
+      if (props.mock) {
+        newResult = props.fakeData;
+      }
+
       let scannedResult = JSON.parse(newResult);
       if (validate(scannedResult)) {
         setResult(scannedResult);
@@ -95,6 +108,12 @@ export default function Scan(props) {
     setErrorOccurred(false);
   };
 
+  React.useEffect(() => {
+    if (props.mock) {
+      onResult();
+    }
+  }, []);
+
   const renderResultScreen = () => {
     Alert.alert(
       'Scanned successfully',
@@ -132,9 +151,17 @@ export default function Scan(props) {
 
   if (isFocused) {
     if (errorOccurred) {
-      return <View style={styles.root}>{renderErrorScreen()}</View>;
+      return (
+        <View testID="rescanAlert" style={styles.root}>
+          {renderErrorScreen()}
+        </View>
+      );
     } else if (showResultAlert) {
-      return <View style={styles.root}>{renderResultScreen()}</View>;
+      return (
+        <View testID="saveAlert" style={styles.root}>
+          {renderResultScreen()}
+        </View>
+      );
     } else {
       return (
         <Provider>

@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-export default class QRCodeLoop extends PureComponent {
+export default class AnimatedQR extends PureComponent {
   state = {
     frame: 0,
   };

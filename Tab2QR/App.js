@@ -53,12 +53,10 @@ export default function App(props) {
 
   return appIsReady ? (
     <SafeAreaView style={styles.root}>
-      {props.mock == null && (
-        <RootNavigation
-          databaseInstance={ScanHistory}
-          scannedHistory={scannedHistory}
-        />
-      )}
+      <RootNavigation
+        databaseInstance={ScanHistory}
+        scannedHistory={scannedHistory}
+      />
       <StatusBar hidden />
     </SafeAreaView>
   ) : null;
@@ -67,6 +65,5 @@ export default function App(props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    // marginTop: StatusBar.currentHeight || 0,
   },
 });

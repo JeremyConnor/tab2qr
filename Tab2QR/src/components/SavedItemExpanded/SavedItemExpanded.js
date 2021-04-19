@@ -18,8 +18,8 @@ import {
 import uuid from 'uuid-random';
 import Moment from 'react-moment';
 import {dataToFrames} from 'qrloop';
-import {AnimatedQR} from '../AnimatedQR/AnimatedQR';
-import {TabCard} from '../TabCard/TabCard';
+import AnimatedQR from '../AnimatedQR/AnimatedQR';
+import TabCard from '../TabCard/TabCard';
 import ScanHistory from '../../db/modal';
 
 export const FABButton = (props) => {
