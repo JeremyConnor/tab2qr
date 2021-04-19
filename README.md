@@ -51,3 +51,13 @@ Users can select any number of Tabs to share to their mobile phone. Users also g
 
 ### The user can also Rename, Delete or Share the list with browser extension
 <p align="center"><img src="https://user-images.githubusercontent.com/73089748/113630395-65f05c80-9685-11eb-9e03-a65350a63c70.png" alt="s5" width="325" height="600"/></p>
+
+### After clicking Send, the mobile app generates animated QR for the list of links which can be scanned using desktop's camera
+![S6](https://user-images.githubusercontent.com/77089409/115274665-8f69b780-a15e-11eb-9510-7cde58726894.png)
+
+### The UI shows a progress bar while scanning the QR code and a message is shown after the scanning is complete.
+![S2](https://user-images.githubusercontent.com/77089409/115274636-8678e600-a15e-11eb-8f7f-cf171cdf326e.png)
+![S3](https://user-images.githubusercontent.com/77089409/115274690-94c70200-a15e-11eb-998e-896542125366.png)
+
+### The list of scanned QR code can be viewed at the bottom of the screen
+![S4](https://user-images.githubusercontent.com/77089409/115274713-985a8900-a15e-11eb-82bb-d9cbebf9a629.png)
