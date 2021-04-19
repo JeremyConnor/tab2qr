@@ -41,7 +41,7 @@ Users can select any number of Tabs to share to their mobile phone. Users also g
 #### As soon as the mobile app detects animated QR code, it shows a progress bar and scans it.
 <p align="center"><img src="https://user-images.githubusercontent.com/73089748/113629572-3ab93d80-9684-11eb-9b50-8c3fef32203a.jpg" alt="s1" width="325" height="600"/></p>
 
-#### The user is then prompted to either save the URLs or open any one of the shared URLs from the list.
+#### The user is then prompted to either save the URLs or open any one of the shared URLs from the list. If user selects Cancel then, a moal screen appears with the list of URLs and then the user can select one of the URL to open it in mobile browser directly.
 <p align="center"><img src="https://user-images.githubusercontent.com/73089748/113629826-94216c80-9684-11eb-9651-2d20c1da81e6.png" alt="s2" width="325" height="600"/></p>
 
 #### The user can view the shared URLs under the ```Saved``` section
