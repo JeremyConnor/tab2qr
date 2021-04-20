@@ -1,4 +1,33 @@
 {
-  "name": "Tab2QR",
-  "displayName": "Tab2QR"
+  "expo": {
+    "name": "Tab2QR App",
+    "description": "Mobile app for Tab2QR browser extension",
+    "slug": "tab2qr-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#7BC887"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.tab2qr.Tab2QR",
+      "versionCode": 0,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }

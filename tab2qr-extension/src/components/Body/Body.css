@@ -1,0 +1,20 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.body-footer-text {
+  padding-top: 10px;
+  text-align: center;
+  color: blue;
+  font-size: 14px;
+}
+
+.main .title {
+  font-size: 16px;
+  text-align: center;
+  color: black;
+}

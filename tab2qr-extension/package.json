@@ -2,16 +2,28 @@
   "name": "tab2qr-extension",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "environment-jsdom-fourteen",
+    "setupFiles": [
+      "jsdom-worker"
+    ]
+  },
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.14.0",
+    "qrcode.react": "^1.0.1",
+    "qrloop": "^1.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-qrcode-logo": "^2.2.1",
+    "react-qr-reader": "^2.2.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,5 +43,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "chrome-api-mock": "^0.0.2",
+    "copy-webpack-plugin": "^6.4.1",
+    "customize-cra": "^1.0.0",
+    "jest-canvas-mock": "^2.3.1",
+    "jest-environment-jsdom-fourteen": "^1.0.1",
+    "jsdom-worker": "^0.2.1",
+    "node-fetch": "^2.6.1",
+    "react-app-rewire-multiple-entry": "^2.2.1",
+    "react-app-rewired": "^2.1.8"
   }
 }
